@@ -1,0 +1,30 @@
+{
+  "name": "chatie-talkie",
+  "version": "1.0.0",
+  "description": "Chatie Talkie is a fun and easy-to-use chat app that lets you stay connected with friends, family, and colleagues no matter where you are. With Chatie Talkie, you can send text messages, voice messages, photos, and videos, all with just a few taps.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "chat",
+    "talk",
+    "chatapp",
+    "friends",
+    "love",
+    "bff"
+  ],
+  "author": "fixmann",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.3",
+    "sequelize": "^6.31.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "sequelize-cli": "^6.6.0"
+  }
+}

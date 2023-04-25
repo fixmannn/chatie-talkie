@@ -10,25 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       sender_id: {
+        allowNull: false, 
         type: Sequelize.INTEGER
       },
       receiver_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       conversation_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       content: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       timestamp: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }

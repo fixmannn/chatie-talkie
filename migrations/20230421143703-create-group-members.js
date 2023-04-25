@@ -10,16 +10,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       group_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       user_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
+      join_date: {
         allowNull: false,
         type: Sequelize.DATE
       }

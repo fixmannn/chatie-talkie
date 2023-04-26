@@ -17,6 +17,7 @@ const generateToken = async (req, res, next) => {
   if (!comparePass) return res.status(401).send('Invalid password');
 
   const token = jwt.sign({
+    id: user.dataValues.id,
     username: username
   }, process.env.SECRET_KEY);
 

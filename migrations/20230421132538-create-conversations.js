@@ -9,8 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      sender_id: {
         type: Sequelize.INTEGER
+      },
+      receiver_id: {
+        type: Sequelize.INTEGER
+      },
+      read: {
+        type: Sequelize.BOOLEAN
       }
     });
   },

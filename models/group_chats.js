@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Group_chats',
+    timestamps: false
   });
   return Group_chats;
 };

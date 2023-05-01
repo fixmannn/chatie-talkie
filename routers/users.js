@@ -6,9 +6,9 @@ const router = express.Router();
 router.get('/profile', authenticateUser, getUserProfile);
 router.post('/signup', signUpController);
 router.post('/login', generateToken, loginController);
-router.post('/logout', logoutController);
+router.post('/logout', authenticateUser, logoutController);
 router.patch('/change-password', changePasswordController);
-router.patch('/profile/update', updateProfileController);
-router.delete('/account/delete', deleteAccountController);
+router.patch('/profile/update', authenticateUser, updateProfileController);
+router.delete('/account/delete', authenticateUser, deleteAccountController);
 
 module.exports = router;

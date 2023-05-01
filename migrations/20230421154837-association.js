@@ -4,9 +4,19 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addConstraint('Conversations', {
-      fields: ['user_id'],
+      fields: ['sender_id'],
       type: 'foreign key',
-      name: 'conversations_association',
+      name: 'conversation_sender_association',
+      references: {
+        table: 'Users',
+        field: 'id'
+      }
+    });
+
+    await queryInterface.addConstraint('Conversations', {
+      fields: ['receiver_id'],
+      type: 'foreign key',
+      name: 'conversation_receiver_association',
       references: {
         table: 'Users',
         field: 'id'
@@ -65,9 +75,12 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeConstraint('Conversations','conversations_association');
+    await queryInterface.removeConstraint('Conversations','conversation_sender_association');
+    await queryInterface.removeConstraint('Conversations','conversation_receiver_association');
     await queryInterface.removeConstraint('Messages', 'message_sender_association');
     await queryInterface.removeConstraint('Messages', 'message_receiver_association');
     await queryInterface.removeConstraint('Messages', 'message_conversation_association');
+    await queryInterface.removeConstraint('Group_members', 'group_members_association');
+    await queryInterface.removeConstraint('Group_members', 'user_group_members_association');
   }
 };

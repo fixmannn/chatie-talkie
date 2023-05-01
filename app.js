@@ -13,11 +13,12 @@ sequelize.sync({alter: true});
 const indexRouter = require('./routers/index');
 const userRouter = require('./routers/users');
 const chatRouter = require('./routers/chats');
+const groupChatRouter = require('./routers/group_chats');
 
 app.use('/', indexRouter);
 app.use('/api', userRouter);
 app.use('/api', chatRouter);
-
+app.use('/api', groupChatRouter);
 
 
 app.listen(process.env.PORT, () => {

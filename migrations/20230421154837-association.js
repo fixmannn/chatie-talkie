@@ -71,7 +71,27 @@ module.exports = {
         table: 'Users',
         field: 'id'
       }
-    })
+    });
+
+    await queryInterface.addConstraint('Group_chats', {
+      fields: ['sender_id'],
+      type: 'foreign key',
+      name: 'sender_id_group_chats',
+      references: {
+        table: 'Users',
+        field: 'id'
+      }
+    });
+
+    await queryInterface.addConstraint('Group_chats', {
+      fields: ['group_id'],
+      type: 'foreign key',
+      name: 'group_id_group_chats',
+      references: {
+        table: 'Users',
+        field: 'id'
+      }
+    });
   },
 
   async down (queryInterface, Sequelize) {
@@ -82,5 +102,7 @@ module.exports = {
     await queryInterface.removeConstraint('Messages', 'message_conversation_association');
     await queryInterface.removeConstraint('Group_members', 'group_members_association');
     await queryInterface.removeConstraint('Group_members', 'user_group_members_association');
+    await queryInterface.removeConstraint('Group_chats', 'sender_id_group_chats');
+    await queryInterface.removeConstraint('Group_chats', 'group_id_group_chats');
   }
 };

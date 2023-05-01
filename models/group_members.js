@@ -25,7 +25,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Group_members.init({
     group_id: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    join_date: DataTypes.DATE,
+    role: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Group_members',

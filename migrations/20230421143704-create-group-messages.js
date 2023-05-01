@@ -2,32 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Group_members', {
+    await queryInterface.createTable('Conversations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      sender_id: {
+        type: Sequelize.INTEGER
+      },
       group_id: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+      content: {
+        type: Sequelize.TEXT
       },
-      join_date: {
-        allowNull: false,
+      timestamp: {
         type: Sequelize.DATE
-      },
-      role: {
-        allowNull: false,
-        type: Sequelize.STRING
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Group_members');
+    await queryInterface.dropTable('Conversations');
   }
 };

@@ -10,7 +10,6 @@ const getConversations = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"].split(" ")[1];
     const auth = jwt_decode(authHeader);
-    // const conversation = await Conversation.findAll({where: {sender_id: auth.id}});
     const conversation = await models.sequelize.query(`SELECT * FROM Conversations WHERE sender_id = ${auth.id} OR receiver_id = ${auth.id}`, {type: QueryTypes.SELECT});
     
     if (conversation.length === 0) return res.status(200).send('No conversation yet');
@@ -53,7 +52,6 @@ const getConversationById = async (req, res) => {
     res.status(404).send(error.message);
   }
 }
-
 
 module.exports = {
   getConversations,

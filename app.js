@@ -24,6 +24,8 @@ app.use('/api', chatRouter);
 app.use('/api', groupChatRouter);
 
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port http://localhost:${process.env.PORT}`);
+const PORT = process.env.PORT || 3270;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port http://localhost:${PORT}`);
 });

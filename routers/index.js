@@ -3,7 +3,9 @@ const router = express.Router();
 const { dbConfig } = require('../config/database');
 
 router.get('/', (req, res) => {
-  res.redirect('/login');
+  res.json({
+    message: 'ok!'
+  })
 });
 
 module.exports = router;

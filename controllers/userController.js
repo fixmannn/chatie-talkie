@@ -6,6 +6,7 @@ const models = require('../models/index');
 const User = models.Users;
 const jwt_decode = require('jwt-decode');
 const bcrypt = require('bcrypt');
+const { QueryTypes } = require('sequelize');
 
 const signUpController = async (req, res) => {
   const emailValid = await validateEmail(req.body.email);
@@ -147,6 +148,27 @@ const deleteAccountController = async (req, res) => {
   }
 }
 
+const getOtherUserProfile = async (req, res) => {
+  const data = await models.sequelize.query(`
+  SELECT username, firstName, lastName, profile_photo FROM Users WHERE username = :username`, 
+  {
+    type: QueryTypes.SELECT,
+    replacements: {
+      username: req.params.username
+    }
+  });
+
+  try {
+    res.json({
+      message: "Get profile success",
+      data: data
+    });
+  } catch (error) {
+    res.status(401).send(error.message);
+  }
+}
+
+
 module.exports = {
   signUpController, 
   loginController, 
@@ -154,5 +176,6 @@ module.exports = {
   changePasswordController, 
   getUserProfile, 
   updateProfileController,
-  deleteAccountController
+  deleteAccountController,
+  getOtherUserProfile
 };

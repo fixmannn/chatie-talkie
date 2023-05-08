@@ -15,6 +15,9 @@ const userRouter = require('./routers/users');
 const chatRouter = require('./routers/chats');
 const groupChatRouter = require('./routers/group_chats');
 
+app.set("view engine", "ejs");
+app.set("views", "views");
+
 app.use('/', indexRouter);
 app.use('/api', userRouter);
 app.use('/api', chatRouter);

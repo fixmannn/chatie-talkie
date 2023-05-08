@@ -53,31 +53,6 @@ const getConversationById = async (req, res) => {
   }
 }
 
-const getMultimediaMessages = async (req, res) => {
-  const authHeader = req.headers["authorization"].split(" ")[1];
-  const auth = jwt_decode(authHeader);
-  const data = await models.sequelize.query(`
-  SELECT content FROM Messages WHERE sender_id = :authId AND receiver_id = :reqId  AND content LIKE '%assets/%'
-  OR sender_id = :reqId AND receiver_id = :authId AND content LIKE '%assets/%'
-  ORDER BY timestamp ASC`, 
-  {
-    type: QueryTypes.SELECT,
-    replacements: {
-      authId: auth.id, 
-      reqId: req.params.id,
-      username: req.params.username
-    }
-  });
-
-  try {
-    res.json({
-      message: "Get multimedia messages success",
-      data: data
-    });
-  } catch (error) {
-    res.status(401).send(error.message);
-  }
-}
 
 const deleteConversationById = async (req, res) => {
   try {
@@ -121,6 +96,5 @@ const deleteConversationById = async (req, res) => {
 module.exports = {
   getConversations,
   getConversationById,
-  getMultimediaMessages,
   deleteConversationById
 }

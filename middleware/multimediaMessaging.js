@@ -8,7 +8,13 @@ const multimediaMessaging = () => {
       if (file.mimetype == 'application/pdf') destinationFolder += 'pdf/';
       if (file.mimetype.startsWith('image/')) destinationFolder += 'images/';
       if (file.mimetype.startsWith('video/')) destinationFolder += 'videos/';
-      if (file.mimetype == 'application/msword' || file.mimetype == 'application/vnd.openxmlformats-officedocument.wordprocessingm1.document') destinationFolder += 'documents/';
+      if (
+        file.mimetype == 'application/msword' ||
+        file.mimetype == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+        file.mimetype == 'application/vnd.ms-excel' ||
+        file.mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+        file.mimetype == 'application/vnd.ms-powerpoint'
+      ) destinationFolder += 'documents/';
 
       cb(null, destinationFolder);
     },
@@ -28,7 +34,10 @@ const multimediaMessaging = () => {
     file.mimetype.startsWith('image/') ||
     file.mimetype.startsWith('video/') ||
     file.mimetype == 'application/msword' ||
-    file.mimetype == 'application/vnd.openxmlformats-officedocument.wordprocessingm1.document'
+    file.mimetype == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+    file.mimetype == 'application/vnd.ms-excel' ||
+    file.mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+    file.mimetype == 'application/vnd.ms-powerpoint'
     ) {
       cb (null, true)
     } else {

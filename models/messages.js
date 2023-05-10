@@ -6,27 +6,27 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Messages.belongsTo(models.Users, {
         foreignKey: 'sender_id',
-        targetKey: 'id'
+        constraints: false
       });
       Messages.belongsTo(models.Users, {
         foreignKey: 'receiver_id',
-        targetKey: 'id'
+        constraints: false
       });
       Messages.belongsTo(models.Conversations, {
         foreignKey: 'conversation_id',
-        targetKey: 'id'
+        constraints: false
       });
       models.Users.hasMany(Messages, {
-        sourceKey: 'id',
-        foreignKey: 'sender_id'
+        foreignKey: 'sender_id',
+        constraints: false
       });
       models.Users.hasMany(Messages, {
-        sourceKey: 'id',
-        foreignKey: 'receiver_id'
+        foreignKey: 'receiver_id',
+        constraints: false
       });
       models.Conversations.hasMany(Messages, {
-        sourceKey: 'id',
-        foreignKey: 'conversation_id'
+        foreignKey: 'conversation_id',
+        constraints: false
       });
     }
   }

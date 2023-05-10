@@ -7,19 +7,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Group_members.belongsTo(models.Users, {
         foreignKey: 'user_id',
-        targetKey: 'id'
+        targetKey: 'id',
+        constraints: false
       });
       Group_members.belongsTo(models.Group_chats, {
         foreignKey: 'group_id',
-        targetKey: 'id'
+        targetKey: 'id',
+        constraints: false
       });
       models.Users.hasMany(Group_members, {
-        sourceKey: 'id',
-        foreignKey: 'user_id'
+        foreignKey: 'user_id',
+        constraints: false
       });
       models.Group_chats.hasMany(Group_members, {
-        sourceKey: 'id',
-        foreignKey: 'group_id'
+        foreignKey: 'group_id',
+        constraints: false
       })
     }
   }

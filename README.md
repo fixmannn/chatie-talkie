@@ -60,7 +60,7 @@ npm run start
 
 ## Postman collection
 
-Here is the postman collection and environment if you need to run the API using postman -> [Environment & Collection](https://drive.google.com/drive/folders/1XMzWqUk7Ke1JGud7UUofOUHg8IiZGnS_?usp=share_link)
+Here is the postman collection and environment if you need to run the API using postman -> [Environment & Collection](https://drive.google.com/drive/folders/1k3twgmtZItNT1xWeJOMua499361kq02y?usp=sharing)
 
 # API Endpoint
 

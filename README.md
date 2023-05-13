@@ -10,7 +10,6 @@ Introducing Chatie Talkie, the ultimate chat application designed to connect lik
 <img src="https://github.com/get-icon/geticon/raw/master/icons/express.svg" alt="ExpressJS" width="75">
 <img src="https://github.com/get-icon/geticon/raw/master/icons/mysql.svg" alt="MySQL" width="75">
 <img src="https://sequelize.org/img/logo.svg" alt="Sequelize" width="75">
-<img src="https://socket.io/images/logo.svg" alt="Socket.io" width="75">
 </p>
 
 ## Entity Relational Diagram
@@ -98,3 +97,4 @@ Here is the postman collection and environment if you need to run the API using 
 | GET    | /api/group/{id}/members                         | Get group members                 |
 | PATCH  | /api/group/{id}/members/role/{user_id}          | Set role to member                |
 | DELETE | /api/group/{id}/members/{user_id}               | Remove member from a group        |
+| DELETE | /api/group/{id}/chats?message_id={value}        | Delete message from a group       |

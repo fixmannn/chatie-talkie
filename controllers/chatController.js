@@ -28,7 +28,7 @@ const getConversationById = async (req, res) => {
     const authHeader = req.headers["authorization"].split(" ")[1];
     const auth = jwt_decode(authHeader);
     const message = await models.sequelize.query(
-      `SELECT sender_id, receiver_id, content, timestamp 
+      `SELECT id, sender_id, receiver_id, content, timestamp 
       FROM Messages 
       WHERE sender_id = :authId AND receiver_id = :reqId 
       OR sender_id = :reqId AND receiver_id = :authId 

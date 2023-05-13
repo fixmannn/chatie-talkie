@@ -72,9 +72,17 @@ const deleteMessage = async (req, res) => {
       id: req.query.id
     }});
 
+    if (!message) return res.status(404).send('Message not found');
+
+    await Message.destroy({
+      where: {
+        sender_id: auth.id,
+        id: req.query.id
+      }
+    });
+
     res.json({
-      message: 'Message has successfully deleted',
-      data: message
+      message: 'Message has successfully deleted'
     })
 
   } catch (error) {
@@ -82,4 +90,32 @@ const deleteMessage = async (req, res) => {
   }
 }
 
-module.exports = {sendMessage, sendMessageToGroup, deleteMessage};
+const deleteMessageFromGroup = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization.split(" ")[1];
+    const auth = jwt_decode(authHeader);
+
+    const group_message = await Group_messages.findOne({where: {
+      sender_id: auth.id,
+      id: req.query.message_id
+    }});
+
+    if (!group_message) return res.status(404).send('Message not found');
+
+    await Group_messages.destroy({
+      where: {
+        sender_id: auth.id,
+        id: req.query.message_id
+      }
+    });
+
+    res.json({
+      message: 'Message has successfully deleted'
+    })
+
+  } catch (error) {
+    res.send(error.message);
+  }
+}
+
+module.exports = {sendMessage, sendMessageToGroup, deleteMessage, deleteMessageFromGroup};

@@ -55,8 +55,15 @@ npm install
 Start the server:
 
 ```
-npm run start
+npm run dev
 ```
+
+NB: if you find it error while running in development mode, try to change
+{ rejectUnauthorized : false} in config/database.js
+
+## How to run it globally
+
+You also can run the API through this URL: https://chatie-talkie.fly.dev
 
 ## Postman collection
 

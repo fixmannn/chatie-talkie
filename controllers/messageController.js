@@ -1,5 +1,6 @@
 const models = require('../models/index');
 const jwt_decode = require('jwt-decode');
+const {QueryTypes} = require('sequelize');
 
 // Models
 const Conversation = models.Conversations;
@@ -85,7 +86,7 @@ const deleteMessage = async (req, res) => {
     })
 
   } catch (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
   }
 }
 
@@ -113,8 +114,34 @@ const deleteMessageFromGroup = async (req, res) => {
     })
 
   } catch (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
   }
 }
 
-module.exports = {sendMessage, sendMessageToGroup, deleteMessage, deleteMessageFromGroup};
+const filterMessaging = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization.split(" ")[1];
+    const auth = jwt_decode(authHeader);
+
+    const data = await models.sequelize.query(`
+    SELECT content, timestamp FROM Messages WHERE sender_id = :authId AND receiver_id = :reqId AND content LIKE '%${req.query.message}%'
+    OR sender_id = :reqId AND receiver_id = :authId AND content LIKE '%${req.query.message}%'
+    ORDER BY timestamp ASC`, 
+    {
+      type: QueryTypes.SELECT,
+      replacements: {
+        authId: auth.id, 
+        reqId: req.params.id
+      }
+    });
+
+    res.json({
+      message: 'Filter message successfully',
+      data: data
+    })
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+}
+
+module.exports = {sendMessage, sendMessageToGroup, deleteMessage, deleteMessageFromGroup, filterMessaging};

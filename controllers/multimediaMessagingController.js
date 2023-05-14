@@ -1,12 +1,13 @@
 const models = require('../models/index');
 const jwt_decode = require('jwt-decode');
 const {QueryTypes} = require('sequelize');
+const path = require('path');
 
 const getMultimediaMessages = async (req, res) => {
   const authHeader = req.headers["authorization"].split(" ")[1];
   const auth = jwt_decode(authHeader);
   const data = await models.sequelize.query(`
-  SELECT content FROM Messages WHERE sender_id = :authId AND receiver_id = :reqId  AND content LIKE '%uploads/%'
+  SELECT content, timestamp FROM Messages WHERE sender_id = :authId AND receiver_id = :reqId  AND content LIKE '%uploads/%'
   OR sender_id = :reqId AND receiver_id = :authId AND content LIKE '%uploads/%'
   ORDER BY timestamp ASC`, 
   {
@@ -44,11 +45,10 @@ const showMultimediaMessage = async (req, res) => {
       }
     });
 
-    res.json({
-      message: "Message has shown successfully",
-      data: data
-    });
+    // res.send(data[0].content);
+    res.sendFile(path.resolve(data[0].content));
   } catch (error) {
+    // console.log(data);
     res.status(401).send(error.message);
   }
 }

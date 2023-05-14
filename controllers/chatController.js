@@ -24,6 +24,19 @@ const getConversationById = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"].split(" ")[1];
     const auth = jwt_decode(authHeader);
+    const conversation = await models.sequelize.query(
+      `SELECT id FROM Conversations WHERE sender_id = :authId AND receiver_id = :reqId`,
+      {
+        type: QueryTypes.SELECT,
+        replacements: {
+          authId: auth.id,
+          reqId: req.params.id
+        }
+      }
+    );
+
+    if (conversation.length === 0) return res.status(404).send('No conversation yet');
+
     const message = await models.sequelize.query(
       `SELECT id, sender_id, receiver_id, content, timestamp 
       FROM Messages 
@@ -56,22 +69,8 @@ const deleteConversationById = async (req, res) => {
     const authHeader = req.headers["authorization"].split(" ")[1];
     const auth = jwt_decode(authHeader);
     
-    const message = await models.sequelize.query(
-      `DELETE FROM Messages 
-      WHERE sender_id = :authId AND receiver_id = :reqId 
-      OR sender_id = :reqId AND receiver_id = :authId`, 
-      {
-        type: QueryTypes.DELETE,
-        replacements: { 
-          authId: auth.id, 
-          reqId: req.params.id 
-        }
-      }
-    );
-    
     const conversation = await models.sequelize.query(`DELETE FROM Conversations 
-    WHERE sender_id = :authId AND receiver_id = :reqId 
-    OR sender_id = :reqId AND receiver_id = :authId `,
+    WHERE sender_id = :authId AND receiver_id = :reqId`,
     {
       type: QueryTypes.DELETE,
       replacements: {

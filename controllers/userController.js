@@ -100,7 +100,15 @@ const changePasswordController = async (req, res) => {
 const getUserProfile = async (req, res) => {
   const authHeader = req.headers["authorization"].split(" ")[1];
   const auth = jwt_decode(authHeader);
-  const data = await User.findOne({where: {username: auth.username}});
+
+  const data = await models.sequelize.query(`
+  SELECT username, firstName, lastName, profile_photo FROM Users WHERE id = :authId`, 
+  {
+    type: QueryTypes.SELECT,
+    replacements: {
+      authId: auth.id
+    }
+  });
 
   try {
     res.json({

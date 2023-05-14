@@ -2,7 +2,6 @@ const models = require('../models/index');
 const jwt_decode = require('jwt-decode');
 
 // Models
-const User = models.Users;
 const Conversation = models.Conversations;
 const Message = models.Messages;
 const Group_messages = models.Group_messages;

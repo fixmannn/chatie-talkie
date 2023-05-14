@@ -3,7 +3,6 @@ const models = require('../models/index');
 const Group_chats = models.Group_chats;
 const Group_members = models.Group_members;
 const Group_messages = models.Group_messages;
-const {QueryTypes} = require('sequelize');
 const currentTime = new Date();
 
 const createGroupChat = async(req, res) => {
@@ -22,7 +21,7 @@ const createGroupChat = async(req, res) => {
       group_id: group_chats.id,
       user_id: auth.id,
       join_date: currentTime,
-      role: "admin"
+      role: "owner"
     });
 
     res.json({
@@ -102,6 +101,8 @@ const getMembers = async (req, res) => {
     group_id: req.params.id
   }});
 
+  if (!getMembers) return res.status(404).send('Group not found');
+
   res.json({
     data: getMembers
   });
@@ -161,11 +162,6 @@ const deleteMember = async (req, res) => {
   } catch (error) {
     res.status(400).send(error.message);
   }
-  
-
-
-  
-
 }
 
 module.exports = {

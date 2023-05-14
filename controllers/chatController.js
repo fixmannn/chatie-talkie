@@ -1,9 +1,6 @@
 const models = require('../models/index');
 const jwt_decode = require('jwt-decode');
 const {QueryTypes} = require('sequelize');
-const User = models.Users;
-const Conversation = models.Conversations;
-const Message = models.Messages;
 
 // Get all conversations
 const getConversations = async (req, res) => {

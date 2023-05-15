@@ -86,7 +86,6 @@ Here is the postman collection and environment if you need to run the API using 
 | GET    | /api/chats                                      | Get all conversations             |
 | GET    | /api/chats/{id}                                 | Get conversation by id            |
 | POST   | /api/chats                                      | Send message to a user            |
-| DELETE | /api/chats/{id}                                 | Delete conversation               |
 | DELETE | /api/chats/{id}/message?id={value}              | Delete message by id              |
 |        |                                                 |                                   |
 |        | **Multimedia messaging**                        |                                   |
@@ -105,3 +104,6 @@ Here is the postman collection and environment if you need to run the API using 
 | PATCH  | /api/group/{id}/members/role/{user_id}          | Set role to member                |
 | DELETE | /api/group/{id}/members/{user_id}               | Remove member from a group        |
 | DELETE | /api/group/{id}/chats?message_id={value}        | Delete message from a group       |
+|        | **Filter Messaging**                            |                                   |
+| GET    | /api/chats/{id}/search?message={value}          | Filter / search message           |
+|        |                                                 |                                   |

@@ -1,5 +1,5 @@
 const express = require('express');
-const { getConversations, getConversationById, deleteConversationById} = require('../controllers/chatController');
+const { getConversations, getConversationById} = require('../controllers/chatController');
 const { sendMessage, deleteMessage, filterMessaging } = require('../controllers/messageController');
 const { multimediaMessaging } = require('../middleware/multimediaMessaging');
 const { authenticateUser } = require('../middleware/authorization');
@@ -11,7 +11,6 @@ const router = express.Router();
 router.get('/chats', authenticateUser, getConversations);
 router.get('/chats/:id', authenticateUser, getConversationById);
 router.get('/chats/:id/search', authenticateUser, filterMessaging);
-router.delete('/chats/:id', authenticateUser, deleteConversationById);
 router.post('/chats', [authenticateUser, multimediaMessaging(), handleFileSizeLimitExceeded, createConversation], sendMessage);
 router.delete('/chats/:id/message', authenticateUser, deleteMessage);
 

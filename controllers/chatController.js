@@ -64,33 +64,7 @@ const getConversationById = async (req, res) => {
 }
 
 
-const deleteConversationById = async (req, res) => {
-  try {
-    const authHeader = req.headers["authorization"].split(" ")[1];
-    const auth = jwt_decode(authHeader);
-    
-    const conversation = await models.sequelize.query(`DELETE FROM Conversations 
-    WHERE sender_id = :authId AND receiver_id = :reqId`,
-    {
-      type: QueryTypes.DELETE,
-      replacements: {
-        authId: auth.id,
-        reqId: req.params.id
-      } 
-    });
-
-    res.json({
-      message: "Conversation deleted successfully"
-    });
-
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-}
-
-
 module.exports = {
   getConversations,
-  getConversationById,
-  deleteConversationById
+  getConversationById
 }

@@ -26,8 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       models.Conversations.hasMany(Messages, {
         foreignKey: 'conversation_id',
-        constraints: false,
-        onDelete: 'SET NULL'
+        constraints: false
       });
     }
   }

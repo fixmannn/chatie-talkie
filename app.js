@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {sequelize} = require('./models');
 const app = express();
+const cors = require('cors');
 require('dotenv').config();
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(cors());
 
 // Sync Database
 sequelize.sync({alter: true});
